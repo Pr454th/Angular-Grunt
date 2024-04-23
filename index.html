@@ -1,0 +1,23 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AngularJS with Grunt</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <!-- Include your script files -->
+    <script src="app.js"></script>
+    <script src="myService.js"></script>
+    <script src="idtReportFilterOptionService.js"></script>
+    <script src="idtReportFilterService.js"></script>
+    <script src="myDirective.js"></script>
+    <script src="customDirective.js"></script>
+    <script src="customController.js"></script>
+  </head>
+  <body>
+    <my-custom-directive></my-custom-directive>
+    <idtmys-drop-down filter="vm.sourceSystemFilter"></idtmys-drop-down>
+    <div ng-controller="MainController">{{ message }}</div>
+    <h1>AngularJS with Grunt</h1>
+  </body>
+</html>

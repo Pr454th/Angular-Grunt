@@ -1,0 +1,64 @@
+<div ng-if="!vm.filter.isMultiSelect">
+  <!--<label for="{{vm.filter.elementId}}">{{vm.filter.elementLabel}}</label>-->
+  <div>
+    <h1>test</h1>
+    <ui-select
+      eri-ui-select-errors
+      id="{{vm.filter.elementId}}"
+      idtmys-select-on-blur
+      ng-model="vm.filter.ngModel"
+      theme="selectize"
+      ng-disabled="vm.filter.isDisabled"
+      ng-required="!vm.filter.isOptional"
+      ng-readonly="vm.filter.isReadonly"
+      on-select="vm.selectItem($select, $model)"
+      on-remove="vm.removeItem($select, $model)"
+      ng-keyup="vm.searchCriteriaChangedForSelect($select)"
+    >
+      <ui-select-match
+        placeholder="{{vm.filter.uiSelectPlaceHolder}}"
+        class="ui-select-match"
+      >
+        {{ $select.selected.value }}
+      </ui-select-match>
+      <ui-select-choices
+        repeat="selectOption in vm.filter.selectOptions | filter: $select.search track by $index"
+        refresh="vm.updateDropdownOptions($select)"
+        refresh-delay="500"
+      >
+        <span ng-bind-html="selectOption.value"></span>
+        <span>{{vm.filter}}</span>
+      </ui-select-choices>
+    </ui-select>
+  </div>
+</div>
+
+<div class="form-group" ng-if="vm.filter.isMultiSelect">
+  <label for="{{vm.filter.elementId}}">{{vm.filter.elementLabel}}</label>
+
+  <ui-select
+    eri-ui-select-errors
+    multiple="true"
+    close-on-select="true"
+    id="{{vm.filter.elementId}}"
+    ng-model="vm.filter.ngModel"
+    theme="bootstrap"
+    ng-disabled="vm.filter.isDisabled"
+    ng-required="!vm.filter.isOptional"
+    on-select="vm.selectItem($select, $model)"
+    on-remove="vm.removeItem($select, $model)"
+    ng-keyup="vm.searchCriteriaChangedForSelect($select)"
+  >
+    <ui-select-match placeholder="{{vm.filter.uiSelectPlaceHolder}}"
+      >{{vm.display($item)}}</ui-select-match
+    >
+    <ui-select-choices
+      repeat="selectOption in vm.filter.selectOptions"
+      refresh="vm.updateDropdownOptions($select)"
+      refresh-delay="500"
+      ui-disable-choice="selectOption.disableChoice"
+    >
+      <span ng-bind-html="selectOption.value"></span>
+    </ui-select-choices>
+  </ui-select>
+</div>
